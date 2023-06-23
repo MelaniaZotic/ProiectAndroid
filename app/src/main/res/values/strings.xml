@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="text_about_us">Step 1. Calculate net income,
+    which is your take-home pay minus deductions
+    for taxes and employer-provided programs.
+    Focus on net income to avoid overspending.
+    Keep detailed notes of contracts and pay for freelancers,
+    gig workers, contractors, or self-employed individuals to manage irregular income.
+    Step 2.Track your spending
+    to determine where your money is going.
+    Start by listing fixed expenses like rent,
+    utilities, and car payments, followed by variable expenses like groceries,
+    gas, and entertainment. Use credit card and bank statements to categorize
+    your monthly expenditures and identify areas for savings.
+    Step 3. Set realistic short- and long-term financial goals
+    before tracking information. Short-term goals, like emergency
+    fund or debt reduction, take one to three years to achieve,
+    while long-term goals, like retirement savings or education,
+    may take decades. Identifying these goals can motivate sticking
+    to your budget, making it easier to cut spending.</string>
+</resources>
