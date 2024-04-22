@@ -1,12 +1,5 @@
 package com.example.myapplication;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.developer.gbuttons.GoogleSignInButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -32,7 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private FirebaseAuth auth;
+    public FirebaseAuth auth;
     private EditText signupEmail, signupPassword;
     private Button signupButton;
     private TextView loginRedirectText;
@@ -82,10 +82,11 @@ public class SignUpActivity extends AppCompatActivity {
                                 //DatabaseReference currentUserRef = usersRef.child(userId);
                                 //currentUserRef.child("email").setValue(email);
 
-                                Toast.makeText(SignUpActivity.this, "SignUp Successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpActivity.this, "SignUp Successful", Toast.LENGTH_LONG).show();
+                                //ToastUtil.showToast(SignUpActivity.this, "SignUp Successful", Toast.LENGTH_SHORT);
                                 startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                             } else {
-                                Toast.makeText(SignUpActivity.this, "SignUp Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpActivity.this, "SignUp Failed" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }
                     });

@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

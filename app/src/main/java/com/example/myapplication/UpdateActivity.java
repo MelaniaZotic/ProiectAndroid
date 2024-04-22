@@ -1,15 +1,6 @@
 package com.example.myapplication;
 
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -21,6 +12,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -81,7 +80,7 @@ public class UpdateActivity extends AppCompatActivity {
                 }
         );
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null){
+        if (bundle != null && bundle.getString("Key") != null){
             Glide.with(UpdateActivity.this).load(bundle.getString("Image")).into(updateImage);
             updateTitle.setText(bundle.getString("Title"));
             updateDesc.setText(bundle.getString("Description"));
@@ -89,9 +88,14 @@ public class UpdateActivity extends AppCompatActivity {
             updateDate.setText(bundle.getString("Date"));
             key = bundle.getString("Key");
             oldImageURL = bundle.getString("Image");
-        }
-        databaseReference = FirebaseDatabase.getInstance().getReference("users").child(key);
 
+            databaseReference = FirebaseDatabase.getInstance().getReference("users").child(key);
+        }
+        //databaseReference = FirebaseDatabase.getInstance().getReference("users").child(key);
+        else {
+            // Tratează cazul când key este null
+            finish(); // Poți încheia activitatea sau afișa un mesaj de eroare
+        }
         updateImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
