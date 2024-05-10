@@ -58,46 +58,50 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("DeleteButton", "Delete button clicked");
+                final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
                 if (imageUrl != null && !imageUrl.isEmpty()) {
-                    Log.d("DeleteButton", "Deleting item with key: " + key);
-                    final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
                     FirebaseStorage storage = FirebaseStorage.getInstance();
-
                     StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
                     storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
-                        public void onSuccess(Void unused) {
+                        public void onSuccess(Void aVoid) {
                             Log.d("DeleteButton", "Image deleted successfully");
-                            reference.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Log.d("DeleteButton", "Item deleted successfully");
-                                    Toast.makeText(DetailActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                    finish();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.e("DeleteButton", "Failed to delete item: " + e.getMessage());
-                                    Toast.makeText(DetailActivity.this, "Failed to delete item", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            deleteDatabaseEntry(reference); // Deletes the database entry regardless of image deletion result.
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Log.e("DeleteButton", "Failed to delete image: " + e.getMessage());
                             Toast.makeText(DetailActivity.this, "Failed to delete image", Toast.LENGTH_SHORT).show();
+                            deleteDatabaseEntry(reference); // Attempt to delete database entry even if image deletion fails.
                         }
                     });
                 } else {
-                    Log.e("DeleteButton", "Invalid image URL");
-                    Toast.makeText(DetailActivity.this, "Invalid image URL", Toast.LENGTH_SHORT).show();
+                    Log.d("DeleteButton", "No image to delete or invalid URL");
+                    deleteDatabaseEntry(reference); // Proceed to delete the database entry if no valid image URL exists.
                 }
             }
+
+            public void deleteDatabaseEntry(DatabaseReference reference) {
+                reference.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("DeleteButton", "Item deleted successfully");
+                        Toast.makeText(DetailActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("DeleteButton", "Failed to delete item: " + e.getMessage());
+                        Toast.makeText(DetailActivity.this, "Failed to delete item", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         });
+
 
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override

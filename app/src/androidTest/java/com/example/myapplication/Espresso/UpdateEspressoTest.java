@@ -58,35 +58,6 @@ public class UpdateEspressoTest {
         ApplicationProvider.getApplicationContext().startActivity(startIntent);
     }
 
-//    @Test
-//    public void testUpdateProcess() {
-//        // Ensure the UI is idle before interacting
-//        onIdle();
-//
-//        // Perform update actions, similar to what was done in DeleteEspressoTest
-//        // Simulate opening the FloatingActionMenu or other necessary navigation
-//        onView(withId(R.id.fab_menu)).perform(click());
-////        onView(withId(R.id.fab_menu))
-////                .perform(waitUntilVisible());
-//
-//        onView(withId(R.id.editButton)).perform(click());
-//
-//        // Perform field updates
-////        onView(withId(R.id.updateTitle)).perform(scrollTo(), click(), replaceText("New Title"));
-////        onView(withId(R.id.updateTitle)).check(matches(withText("New Title")));
-////
-////        onView(withId(R.id.updateDesc)).perform(scrollTo(), click(), replaceText("Updated Description"));
-////        onView(withId(R.id.updateDesc)).check(matches(withText("Updated Description")));
-////
-////        onView(withId(R.id.updateBudg)).perform(scrollTo(), click(), replaceText("1500"));
-////        onView(withId(R.id.updateBudg)).check(matches(withText("1500")));
-////
-////        // Assuming that there is a button to confirm the updates
-////        onView(withId(R.id.updateButton)).perform(scrollTo(), click());
-//
-//        // Assuming update confirmation results in some UI change
-//        // Here you would check for a Toast, a dialog, or a return to another activity
-//    }
 
     @Test
     public void testSelectImage() {

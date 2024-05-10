@@ -48,6 +48,7 @@ public class UploadUIAutomatorTest {
         }
     }
 
+
     @Test
     public void testFillTitle() throws UiObjectNotFoundException {
         // Testează completarea câmpului de titlu

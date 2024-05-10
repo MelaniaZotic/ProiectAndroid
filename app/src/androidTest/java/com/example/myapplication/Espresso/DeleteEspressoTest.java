@@ -3,11 +3,11 @@ package com.example.myapplication.Espresso;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 import android.content.Intent;
-import android.os.Bundle;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.intent.Intents;
@@ -31,44 +31,42 @@ public class DeleteEspressoTest {
 
     @Before
     public void setUp() {
-        // Initialize intents monitoring before each test
         Intents.init();
-
-        // Correctly launch the activity with required extras if any
         Intent startIntent = new Intent(ApplicationProvider.getApplicationContext(), DetailActivity.class);
-        Bundle extras = new Bundle();
-        // Add necessary extras
-        extras.putString("Key", "exampleKey"); // Example key
-        startIntent.putExtras(extras);
-        startIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // Needed when starting an activity from outside of an Activity context
-        ApplicationProvider.getApplicationContext().startActivity(startIntent);
+        startIntent.putExtra("Key", "exampleKey");
+        // Nu transmitem imageUrl pentru a simula scenarii fără imagine.
+        activityScenarioRule.getScenario().onActivity(activity -> activity.startActivity(startIntent));
     }
 
     @Test
-    public void testDeleteBudget() {
-        // Simulate clicking the FloatingActionMenu to open it
+    public void testTitleVisibility() {
+        onView(withId(R.id.detailTitle)).check(matches(isCompletelyDisplayed()));
+    }
+
+    @Test
+    public void testFabMenuAccessibility() {
         onView(withId(R.id.fab_menu)).perform(click());
-
-        // Add a short delay to allow the menu to open and the button to become visible
-        // You can adjust the duration if needed
-        try {
-            Thread.sleep(300); // Adjust as needed
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // Check that the delete button has become visible
         onView(withId(R.id.deleteButton)).check(matches(isDisplayed()));
+    }
 
-        // Now, perform the click on the delete button
+    @Test
+    public void testDeleteButtonVisibility() {
+        onView(withId(R.id.fab_menu)).perform(click());
+        onView(withId(R.id.deleteButton)).check(matches(isCompletelyDisplayed()));
+    }
+
+    @Test
+    public void testDeleteFunctionality() throws InterruptedException {
+        onView(withId(R.id.fab_menu)).perform(click());
         onView(withId(R.id.deleteButton)).perform(click());
+        Thread.sleep(2000); // Așteaptă pentru a verifica navigația
 
-        // Assuming deletion brings you back to a main activity or changes the UI significantly
-        onView(withId(R.id.detail)).check(matches(isDisplayed()));
+        // Verifică dacă RecyclerView-ul din MainActivity este vizibil
+        onView(withId(R.id.recyclerView)).check(matches(isDisplayed()));
     }
 
     @After
     public void tearDown() {
-        Intents.release(); // Clean up intents monitoring after each test
+        Intents.release();
     }
 }
