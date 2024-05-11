@@ -38,8 +38,8 @@ public class SignUpUIAutomatorTest {
         Context context = getInstrumentation().getTargetContext();
         Intent intent = context.getPackageManager().getLaunchIntentForPackage("com.example.myapplication");
         if (intent != null) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);    // Clear out any previous instances
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);      // Add this flag to start a new task
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }
         device.wait(Until.hasObject(By.pkg("com.example.myapplication").depth(0)), 5000);
@@ -48,7 +48,7 @@ public class SignUpUIAutomatorTest {
 
     @Test
     public void testSignUp() throws UiObjectNotFoundException {
-        // Așteaptă și verifică că câmpul de email este prezent înainte de a încerca să interacționezi cu el
+        // Așteaptă și verifică că câmpul de email este prezent
         UiObject2 emailField = device.wait(Until.findObject(By.res("com.example.myapplication:id/signup_email")), 5000);
         if (emailField == null) {
             throw new AssertionError("Signup email field not found.");

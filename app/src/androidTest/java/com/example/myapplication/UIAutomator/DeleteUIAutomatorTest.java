@@ -26,19 +26,19 @@ public class DeleteUIAutomatorTest {
     @Before
     public void setUp() {
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
-        // Prepare the intent to launch the DetailActivity
+
         Intent intent = new Intent(ApplicationProvider.getApplicationContext(), DetailActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        // Add extras as needed for the activity
-        intent.putExtra("Key", "exampleKey"); // Replace with actual key and value as needed
+
+        intent.putExtra("Key", "exampleKey");
         ApplicationProvider.getApplicationContext().startActivity(intent);
-        // Ensure the UI has loaded
+
         device.waitForIdle();
     }
 
     @Test
     public void testDeleteAction() throws UiObjectNotFoundException {
-        // Wait for the application to start and the UI to become ready
+
         device.wait(Until.hasObject(By.pkg("com.example.myapplication")), 5000);
 
         UiObject fabMenuButton = device.findObject(new UiSelector().resourceId("com.example.myapplication:id/fab_menu"));

@@ -38,11 +38,11 @@ public class UploadUIAutomatorTest {
         device.findObject(By.res(PACKAGE_NAME, "uploadImage")).click();
         device.wait(Until.hasObject(By.pkg("com.android.documentsui")), TIMEOUT);
 
-        // Găsește direct un element vizibil pe ecran, de exemplu, primul fișier vizibil
+        // Găsește direct un element vizibil
         UiObject2 file = device.findObject(By.res("com.android.documentsui:id/date"));
         if (file != null) {
             file.click();
-            // Așteaptă ca imaginea să fie încărcată sau continuă cu alte acțiuni
+            // Așteaptă ca imaginea să fie încărcată
         } else {
             System.out.println("No image found");
         }

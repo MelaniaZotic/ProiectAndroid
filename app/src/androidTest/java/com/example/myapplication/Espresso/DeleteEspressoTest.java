@@ -58,7 +58,9 @@ public class DeleteEspressoTest {
     @Test
     public void testDeleteFunctionality() throws InterruptedException {
         onView(withId(R.id.fab_menu)).perform(click());
-        onView(withId(R.id.deleteButton)).perform(click());
+        Thread.sleep(2000);
+        //onView(withId(R.id.deleteButton)).perform(click());
+        onView(withId(R.id.deleteButton)).check(matches(isDisplayed())).perform(click());
         Thread.sleep(2000); // Așteaptă pentru a verifica navigația
 
         // Verifică dacă RecyclerView-ul din MainActivity este vizibil

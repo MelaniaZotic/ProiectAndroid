@@ -104,7 +104,7 @@ public class UploadEspressoTest {
 
         // Setează data în DatePickerDialog
         Espresso.onView(ViewMatchers.withClassName(Matchers.equalTo(DatePicker.class.getName())))
-                .inRoot(RootMatchers.isDialog()) // asigură-te că interacționezi cu dialogul
+                .inRoot(RootMatchers.isDialog())
                 .perform(PickerActions.setDate(year, month + 1, day));
 
         // Apasă pe butonul OK pentru a confirma data
@@ -112,22 +112,10 @@ public class UploadEspressoTest {
                 .inRoot(RootMatchers.isDialog())
                 .perform(ViewActions.click());
 
-        // Verifică dacă TextView-ul care arată data a fost actualizat (asumând că ai un format specific de dată)
-        String expectedDate = String.format("%02d-%02d-%d", day, month + 1, year); // ajustează formatul conform aplicației tale
+        // Verifică dacă TextView-ul care arată data a fost actualizat
+        String expectedDate = String.format("%02d-%02d-%d", day, month + 1, year);
         Espresso.onView(withId(R.id.uploadDate))
                 .check(ViewAssertions.matches(ViewMatchers.withText(expectedDate)));
     }
-//    @Test
-//    public void testSelectDate() {
-//        onView(withId(R.id.buttonDate)).perform(scrollTo(), click());
-//        // Setează data curentă în DatePickerDialog și confirmă
-//        // Trebuie să mock-uiești sau să folosești un idling resource pentru a aștepta și verifica dialogul
-//        onView(withId(R.id.uploadDate)).check(matches(withText(getCurrentDate())));
-//    }
-//
-//    private String getCurrentDate() {
-//        Calendar cal = Calendar.getInstance();
-//        // Aici poți ajusta formatul datei în funcție de cum este afișată în aplicație
-//        return String.format("%02d-%02d-%d", cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.YEAR));
-//    }
+
 }

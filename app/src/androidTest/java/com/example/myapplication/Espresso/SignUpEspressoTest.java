@@ -42,7 +42,7 @@ public class SignUpEspressoTest {
         // Apasă pe butonul de înregistrare
         onView(withId(R.id.signup_button)).perform(click());
 
-        // Verifică dacă navighează către activitatea următoare (înlocuiește LoginActivity.class cu activitatea ta de destinație)
+        // Verifică dacă navighează către activitatea următoare
         intending(hasComponent(LoginActivity.class.getName()));
     }
 
